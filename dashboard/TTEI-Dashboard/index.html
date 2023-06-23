@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>TTEI Prod-Dashboard by AdvantryX</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <script>
+        function autoRefresh() {
+            window.location = window.location.href = "http://localhost/TTEI/dashboard/TTEI-Dashboard/index.html?code-line=069";
+        }
+        setInterval(autoRefresh, 10000);
+    </script>
+    <body>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-wiht bg-wiht">
+            <div class="container px-lg-5">
+                <a class="navbar-brand" href="http://advantryx.com/"> <img src="assets/Logo.png" alt="Logo" style="width:40mm;height:15mm"> </a>
+                <div class="navbar-brand">
+                    <h4 class="navbar-nav ms-auto mb-2 mb-lg-0 text-muted" id="prodline"> PRODLINE: </h4>
+                </div>
+                <div class="navbar-brand">
+                    <h4 class="navbar-nav ms-auto mb-2 mb-lg-0 text-muted" id="date"> DATE: </h4>
+                </div>
+                <div class="navbar-brand">
+                    <h4 class="navbar-nav ms-auto mb-2 mb-lg-0 text-muted" id="time"> HEURE: </h4>
+                </div>
+                <script>
+                    // Fonction pour formater le nombre avec un zéro devant s'il est inférieur à 10
+                    function formatterNombre(nombre) {
+                      return nombre < 10 ? `0${nombre}` : nombre;
+                    }
+                  
+                    // Sélectionner les éléments HTML pour la date et l'heure
+                    const dateElement = document.getElementById('date');
+                    const heureElement = document.getElementById('time');
+                  
+                    // Fonction pour afficher la date et l'heure actuelles
+                    function afficherDateHeure() {
+                      // Obtenir la date et l'heure actuelles
+                      const maintenant = new Date();
+                      const annee = maintenant.getFullYear();
+                      const mois = formatterNombre(maintenant.getMonth() + 1);
+                      const jour = formatterNombre(maintenant.getDate());
+                      const heures = formatterNombre(maintenant.getHours());
+                      const minutes = formatterNombre(maintenant.getMinutes());
+                      const secondes = formatterNombre(maintenant.getSeconds());
+                  
+                      // Afficher la date dans l'élément HTML
+                      dateElement.textContent = 'DATE: '.concat( `${annee}-${mois}-${jour}`);
+                  
+                      // Afficher l'heure dans l'élément HTML
+                      heureElement.textContent ='HEURE: '.concat(`${heures}:${minutes}:${secondes}`);
+                    }
+                  
+                    afficherDateHeure();
+                  
+                    setInterval(afficherDateHeure, 1000);
+                </script>
+                <a class="navbar-brand float-right"> <img src="assets/OneTechLogo.png" alt="Logo" style="width:40mm;height:40mm;margin-left:30mm"> </a>
+            </div>
+        </nav>
+        <!-- Header-->
+        <header class="py-3">
+        </header>
+        <!-- Page Content-->
+        <section class="pt-4">
+            <div class="container px-lg-5">
+                <!-- Page Features-->
+                <div class="row gx-lg-5">
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><img src="./assets/prog.svg" alt="icone"></img></div>
+                                <h2 class="fs-4 fw-bold text-muted">Référence Encours</h2>
+                                <p class="h3 mb-0" id="ref"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><img src="./assets/clock.svg" alt="icone"></img></div>
+                                <h2 class="fs-4 fw-bold text-muted">Présence</h2>
+                                <p class="h2 mb-0" id="presence"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><img src="./assets/settings.svg" alt="icone"></img></div>
+                                <h2 class="fs-4 fw-bold text-muted">Productivité</h2>
+                                <p class="h2 mb-0" id="productivity">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><img src="./assets/good.svg" alt="icone"></img></div>
+                                <h2 class="fs-4 fw-bold text-muted">Quantité OK</h2>
+                                <p class="h4 mb-0" id="okref"></p>
+                                <p class="h4 mb-0" id="okshift"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><img src="./assets/bad.svg" alt="icone"></img></div>
+                                <h2 class="fs-4 fw-bold text-muted">Quantité NOK</h2>
+                                <p class="h4 mb-0" id="nokref"></p>
+                                <p class="h4 mb-0" id="nokshift"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"><img src="./assets/activity.svg" alt="icone"></img></div>
+                                <h2 class="fs-4 fw-bold text-muted">PPM</h2>
+                                <p class="h4 mb-0" id="ppmref"></p>
+                                <p class="h4 mb-0" id="ppmshift"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+        <footer class="py-2">
+            <div class="container"><p class="m-0 text-center text-muted">Copyright &copy; <a class="navbar-brand" href="http://advantryx.com/">DigiWire By AdvantryX</a> </p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"> </script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
