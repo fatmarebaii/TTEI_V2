@@ -41,6 +41,10 @@ class ProdlineController
             case "prod-shift":
                 $this->ProductShift();
                 break;
+            
+            case "productivity":
+                $this->OperatorProductivity();
+                break;
 
             default:
                 http_response_code(404);
@@ -174,6 +178,27 @@ class ProdlineController
             "qOK" => $OK,
             "qNOK" => $NOK,
             "qPPM" => round($PPM,2)
+        ]);
+    }
+
+    public function OperatorProductivity(): void
+    {
+        $lineCode = $_GET["code-line"] ?? NULL;
+
+        // GUARD
+        if (is_null($lineCode)) {
+            http_response_code(400);
+            echo json_encode([ 
+                "error" => "BAD_REQUEST",
+            ]);
+            return;
+        }
+
+        $productivity = $this->prodlineGateway->getOperatorProductivity($lineCode);
+
+        echo json_encode([
+            // "error" => "NO_ERROR",
+            "productivity" => $productivity,
         ]);
     }
 }

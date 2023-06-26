@@ -194,4 +194,34 @@ class ProdlineGateway
         return $referenceStats ?? [];
     }
 
+    public function getOperatorProductivity(string $lineCode): int
+    {
+        $shiftStartTimes = [
+            "morning" => "06:00:00",
+            "afternoon" => "14:00:00",
+            "night" => "22:00:00"
+        ];
+
+        $currentDateTime = date("Y-m-d H:i:s");
+        $shift = $this->getCurrentShiftPresence($currentDateTime, $shiftStartTimes);
+
+        $sql = "SELECT `productivity` FROM `prod__productivity`
+    WHERE
+        `line_code` = :line_code 
+        AND `cur_dt` >= :shift_start_time
+        AND `cur_dt` < :shift_end_time;";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([
+            ":line_code" => $lineCode,
+            ":shift_start_time" => $shift["start_time"],
+            ":shift_end_time" => $shift["end_time"]
+        ]);
+
+        $productivity = $stmt->fetchColumn();
+        $stmt->closeCursor();
+
+        return $productivity;
+    }
+
 }
