@@ -43,9 +43,9 @@
                     const dateElement = document.getElementById('date');
                     const heureElement = document.getElementById('time');
                   
-                    // Fonction pour afficher la date et l'heure actuelles
+                    // Fonction pour afficher current date & hour
                     function afficherDateHeure() {
-                      // Obtenir la date et l'heure actuelles
+                      // Obtenir current date & hour
                       const maintenant = new Date();
                       const annee = maintenant.getFullYear();
                       const mois = formatterNombre(maintenant.getMonth() + 1);
@@ -54,10 +54,10 @@
                       const minutes = formatterNombre(maintenant.getMinutes());
                       const secondes = formatterNombre(maintenant.getSeconds());
                   
-                      // Afficher la date dans l'élément HTML
-                      dateElement.textContent = 'DATE: '.concat( `${annee}-${mois}-${jour}`);
+                      
+                      dateElement.textContent = 'DATE: '.concat( `${jour}-${mois}-${annee}`);
                   
-                      // Afficher l'heure dans l'élément HTML
+                      
                       heureElement.textContent ='HEURE: '.concat(`${heures}:${minutes}:${secondes}`);
                     }
                   
