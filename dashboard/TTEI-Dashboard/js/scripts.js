@@ -35,7 +35,11 @@ function fetchAndDisplayProdReferenceData() {
   fetchData('http://127.0.0.1/ttei/dashboard/api/prodline/prod-reference/?code-line=' + codeLine)
     .then(function(response) {
       var refElement = document.getElementById('ref');
-      refElement.textContent = response.latest_reference;
+      if (response.latest_reference === '') {
+        refElement.textContent = 'NO REFERENCE AVAILABLE';
+      } else {
+        refElement.textContent = response.latest_reference;
+      }
 
       var okrefElement = document.getElementById('okref');
       okrefElement.textContent = 'REF: ' + response.qOK;
@@ -51,10 +55,12 @@ function fetchAndDisplayProdReferenceData() {
     });
 }
 
+
 // Récupérer et afficher le contenu de 'OK', 'NOK' et 'PPM' dans les éléments correspondants
 function fetchAndDisplayProdShiftData() {
   fetchData('http://127.0.0.1/ttei/dashboard/api/prodline/prod-shift/?code-line=' + codeLine)
     .then(function(response) {
+
       var okshiftElement = document.getElementById('okshift');
       okshiftElement.textContent = 'SHIFT: ' + response.qOK;
 

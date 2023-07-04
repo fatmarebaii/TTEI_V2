@@ -78,10 +78,17 @@ class ProdlineGateway
 
     public function getLatestReference(string $lineCode): string
     {
-        $sql = "SELECT `reference` FROM `prod__production` WHERE `line_code` = :line_code ORDER BY `id` DESC LIMIT 1";
+        $sql = "SELECT `reference` FROM `prod__production` WHERE `line_code` = :line_code AND `cur_dt` >= :shift_start_time 
+        AND `cur_dt` <= :shift_end_time ORDER BY `id` DESC LIMIT 1";
+
+        $shifts = $this->getCurrentShifts();
+        $startTime = $shifts['start_time'];
+        $endTime = $shifts['end_time'];
 
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([":line_code" => $lineCode]);
+        $stmt->execute([":line_code" => $lineCode,
+        ":shift_start_time" => $startTime,
+        ":shift_end_time" => $endTime,]);
         $latestReference = $stmt->fetchColumn();
         $stmt->closeCursor();
 
@@ -209,7 +216,8 @@ class ProdlineGateway
     WHERE
         `line_code` = :line_code 
         AND `cur_dt` >= :shift_start_time
-        AND `cur_dt` < :shift_end_time;";
+        AND `cur_dt` < :shift_end_time
+        ORDER BY `id` DESC LIMIT 1   ;";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([

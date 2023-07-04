@@ -158,10 +158,9 @@ class ProdlineController
         }
 
         $referenceStats = $this->prodlineGateway->getLatestReferenceStats($lineCode);
+        $productref='NO REFERNCE AVAILABLE';
 
-        if ($referenceStats['last_reference']===null){
-            $productref='NO REFERNCE AVAILABLE';
-        }else {
+        if ($referenceStats['last_reference']!==null){
             $productref=$referenceStats['last_reference'];
         }
 
@@ -195,6 +194,9 @@ class ProdlineController
         }
 
         $productivity = $this->prodlineGateway->getOperatorProductivity($lineCode);
+        if ($productivity ===null){
+            $productivity='NO PRODUCTIVITY VALUE AVAILABLE';
+        }
 
         echo json_encode([
             // "error" => "NO_ERROR",
